@@ -24,18 +24,12 @@ public class Binarization {
     private static final Logger logger = LoggerFactory.getLogger(Binarization.class);
 
     /**
-     * 面板
-     */
-    private IaPanel iaPanel;
-
-    /**
      * 缩放
      *
      * @param iaPanel 面板
      */
     public void run(IaPanel iaPanel) {
         logger.info("菜单：二值化");
-        this.iaPanel = iaPanel;
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
         slider.setToolTipText("二值化阈值");
         slider.setMajorTickSpacing(32);
@@ -46,6 +40,7 @@ public class Binarization {
         dialog.setTitle("二值化阈值");
         dialog.setPreferredSize(new Dimension(500, 100));
         dialog.setSize(new Dimension(500, 100));
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(slider, BorderLayout.CENTER);
@@ -65,12 +60,19 @@ public class Binarization {
                 } catch (IOException e1) {
                     logger.error("图片文件路径:{}", iaPanel.getPath(), e1);
                 }
+                dialog.setVisible(false);
             }
         });
         dialog.getContentPane().add(ok, BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
 
+    /**
+     * 二值化处理算法
+     * @param bufferedImage 图像
+     * @param value 阈值
+     * @return 二值化处理后的图像
+     */
     public BufferedImage binarization(BufferedImage bufferedImage, int value) {
         //图像宽度，高度
         int width = bufferedImage.getData().getWidth();

@@ -22,11 +22,6 @@ import java.nio.file.Paths;
 public class MenuUtil {
 
     /**
-     * 页面
-     */
-    private IaPanel iaPanel;
-
-    /**
      * 菜单项监听
      */
     private IaMenuItemActionListener iaMenuItemActionListener;
@@ -47,7 +42,6 @@ public class MenuUtil {
     private static final String ICON_SIZE = "ia.ui.menu.icon.size";
 
     public MenuUtil(IaPanel iaPanel) {
-        this.iaPanel = iaPanel;
         iaMenuItemActionListener = new IaMenuItemActionListener(iaPanel);
     }
 

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * 图像信息
@@ -28,6 +29,7 @@ public class Info {
         dialog.setTitle("图像信息");
         dialog.setPreferredSize(new Dimension(400, 300));
         dialog.setSize(new Dimension(400, 300));
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
         JPanel jPanel = new JPanel();
@@ -38,6 +40,14 @@ public class Info {
         JLabel height = new JLabel("" + iaPanel.getContent().getImage().getHeight());
         jPanel.add(height);
         dialog.getContentPane().add(jPanel, BorderLayout.CENTER);
+        JButton close = new JButton("关闭");
+        close.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+            }
+        });
+        dialog.getContentPane().add(close, BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
 }

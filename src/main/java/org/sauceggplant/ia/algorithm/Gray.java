@@ -22,18 +22,12 @@ public class Gray {
     private static final Logger logger = LoggerFactory.getLogger(Gray.class);
 
     /**
-     * 面板
-     */
-    private IaPanel iaPanel;
-
-    /**
      * 灰度
      *
      * @param iaPanel 面板
      */
     public void run(IaPanel iaPanel) {
         logger.info("菜单：灰度");
-        this.iaPanel = iaPanel;
         if (StringUtil.isNullOrEmpty(iaPanel.getPath())) {
             logger.error("图片文件路径为空，请先打开一张图片");
             return;
@@ -46,6 +40,11 @@ public class Gray {
         }
     }
 
+    /**
+     * 图像灰度算法
+     * @param bufferedImage 图像
+     * @return 灰度处理后图像
+     */
     public static BufferedImage gray(BufferedImage bufferedImage) {
         //图像宽度，高度
         int width = bufferedImage.getData().getWidth();

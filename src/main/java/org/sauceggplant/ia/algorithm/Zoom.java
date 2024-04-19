@@ -24,18 +24,12 @@ public class Zoom {
     private static final Logger logger = LoggerFactory.getLogger(Zoom.class);
 
     /**
-     * 面板
-     */
-    private IaPanel iaPanel;
-
-    /**
      * 缩放
      *
      * @param iaPanel 面板
      */
     public void run(IaPanel iaPanel) {
         logger.info("菜单：缩放");
-        this.iaPanel = iaPanel;
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
         slider.setToolTipText("图像缩放比例");
         slider.setMajorTickSpacing(10);
@@ -46,6 +40,7 @@ public class Zoom {
         dialog.setTitle("缩放百分比");
         dialog.setPreferredSize(new Dimension(500, 100));
         dialog.setSize(new Dimension(500, 100));
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(slider, BorderLayout.CENTER);
@@ -66,6 +61,7 @@ public class Zoom {
                 } catch (IOException e1) {
                     logger.error("图片文件路径:{}", iaPanel.getPath(), e1);
                 }
+                dialog.setVisible(false);
             }
         });
         dialog.getContentPane().add(ok, BorderLayout.SOUTH);
