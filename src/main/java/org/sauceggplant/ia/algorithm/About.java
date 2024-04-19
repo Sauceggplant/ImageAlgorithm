@@ -10,7 +10,7 @@ import javax.swing.*;
 /**
  * 关于
  */
-public class About {
+public class About implements Algorithm {
 
     /**
      * 日志
@@ -22,6 +22,7 @@ public class About {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：关于");
         JOptionPane.showMessageDialog(iaPanel,

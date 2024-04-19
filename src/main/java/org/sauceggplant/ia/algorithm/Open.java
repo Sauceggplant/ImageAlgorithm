@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * 打开
  */
-public class Open {
+public class Open implements Algorithm {
 
     /**
      * 日志
@@ -25,6 +25,7 @@ public class Open {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：打开");
         JFileChooser fileChooser = new JFileChooser();

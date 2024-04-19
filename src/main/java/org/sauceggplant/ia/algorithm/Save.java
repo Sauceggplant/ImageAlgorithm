@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * 存储
  */
-public class Save {
+public class Save implements Algorithm {
 
     /**
      * 日志
@@ -25,6 +25,7 @@ public class Save {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：存储");
         JFileChooser fileChooser = new JFileChooser();

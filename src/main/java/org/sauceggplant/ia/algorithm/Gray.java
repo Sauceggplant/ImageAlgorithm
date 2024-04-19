@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * 灰度
  */
-public class Gray {
+public class Gray implements Algorithm {
 
     /**
      * 日志
@@ -26,6 +26,7 @@ public class Gray {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：灰度");
         if (StringUtil.isNullOrEmpty(iaPanel.getPath())) {

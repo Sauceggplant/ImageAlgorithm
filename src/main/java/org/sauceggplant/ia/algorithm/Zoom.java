@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * 缩放
  */
-public class Zoom {
+public class Zoom implements Algorithm {
 
     /**
      * 日志
@@ -28,6 +28,7 @@ public class Zoom {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：缩放");
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);

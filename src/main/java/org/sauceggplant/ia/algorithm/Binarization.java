@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * 二值化
  */
-public class Binarization {
+public class Binarization implements Algorithm {
 
     /**
      * 日志
@@ -28,6 +28,7 @@ public class Binarization {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：二值化");
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);

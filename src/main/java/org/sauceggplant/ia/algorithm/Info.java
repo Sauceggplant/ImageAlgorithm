@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 /**
  * 图像信息
  */
-public class Info {
+public class Info implements Algorithm {
 
     /**
      * 日志
@@ -23,6 +23,7 @@ public class Info {
      *
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：信息");
         JDialog dialog = new JDialog(iaPanel.getIaWindow());

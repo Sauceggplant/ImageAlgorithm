@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 退出
  */
-public class Quit {
+public class Quit implements Algorithm {
 
     /**
      * 日志
@@ -18,6 +18,7 @@ public class Quit {
      * 退出
      * @param iaPanel 面板
      */
+    @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：退出");
         System.exit(0);

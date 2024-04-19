@@ -32,6 +32,12 @@
     "mnemonic": "R",
     "menuItemList": [
       {
+        "name": "info",
+        "text": "<html><U>I</U>信息",
+        "icon": "icon.png",
+        "accelerator": 73
+      },
+      {
         "name": "zoom",
         "text": "<html><U>Z</U>缩放",
         "icon": "icon.png",
@@ -50,10 +56,10 @@
         "accelerator": 66
       },
       {
-        "name": "info",
-        "text": "<html><U>I</U>信息",
+        "name": "colorRatio",
+        "text": "<html><U>C</U>颜色占比",
         "icon": "icon.png",
-        "accelerator": 73
+        "accelerator": 67
       }
     ]
   },
