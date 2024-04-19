@@ -81,25 +81,25 @@ public class ColorRatio implements Algorithm {
      * @return 界面
      */
     JPanel sliderPanel(int red, int green, int blue) {
-        redSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, red);
+        redSlider = new JSlider(JSlider.HORIZONTAL, red - 255, red + 255, red);
         redSlider.setToolTipText("红色");
-        redSlider.setMajorTickSpacing(15);
+        redSlider.setMajorTickSpacing(30);
         redSlider.setMinorTickSpacing(1);
         redSlider.setPaintLabels(true);
         redSlider.setPaintTicks(true);
         redSlider.setPreferredSize(new Dimension(480, 80));
 
-        greenSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, green);
+        greenSlider = new JSlider(JSlider.HORIZONTAL, green - 255, green + 255, green);
         greenSlider.setToolTipText("绿色");
-        greenSlider.setMajorTickSpacing(15);
+        greenSlider.setMajorTickSpacing(30);
         greenSlider.setMinorTickSpacing(1);
         greenSlider.setPaintLabels(true);
         greenSlider.setPaintTicks(true);
         greenSlider.setPreferredSize(new Dimension(480, 80));
 
-        blueSlider = new JSlider(JSlider.HORIZONTAL, 0, 255, blue);
+        blueSlider = new JSlider(JSlider.HORIZONTAL, blue - 255, blue + 255, blue);
         blueSlider.setToolTipText("蓝色");
-        blueSlider.setMajorTickSpacing(15);
+        blueSlider.setMajorTickSpacing(30);
         blueSlider.setMinorTickSpacing(1);
         blueSlider.setPaintLabels(true);
         blueSlider.setPaintTicks(true);
@@ -110,17 +110,17 @@ public class ColorRatio implements Algorithm {
         JPanel redPanel = new JPanel();
         redPanel.setPreferredSize(new Dimension(600, 80));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        redPanel.add(new JLabel("红色(0-255)："));
+        redPanel.add(new JLabel("红色："));
         redPanel.add(redSlider);
         JPanel greenPanel = new JPanel();
         greenPanel.setPreferredSize(new Dimension(600, 80));
         greenPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        greenPanel.add(new JLabel("绿色(0-255)："));
+        greenPanel.add(new JLabel("绿色："));
         greenPanel.add(greenSlider);
         JPanel bluePanel = new JPanel();
         bluePanel.setPreferredSize(new Dimension(600, 80));
         bluePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bluePanel.add(new JLabel("蓝色(0-255)："));
+        bluePanel.add(new JLabel("蓝色："));
         bluePanel.add(blueSlider);
         panel.add(redPanel);
         panel.add(greenPanel);
@@ -138,6 +138,10 @@ public class ColorRatio implements Algorithm {
     public void colorRatioChange(int red, int green, int blue) {
         logger.info("调整的颜色幅度数值：红:{} 绿:{} 蓝:{}", red, green, blue);
         BufferedImage image = iaPanel.getContent().getImage();
+        if (null == image) {
+            logger.error("请先打开一张图片");
+            return;
+        }
         int width = image.getData().getWidth();
         int height = image.getData().getHeight();
         BufferedImage result = new BufferedImage(width, height, image.getType());
@@ -148,6 +152,7 @@ public class ColorRatio implements Algorithm {
                 int changeRed = c.getRed() + red;
                 int changeGreen = c.getGreen() + green;
                 int changeBlue = c.getBlue() + blue;
+                //颜色超出阈值矫正(颜色范围0--255)
                 changeRed = changeRed > 255 ? 255 : (changeRed < 0 ? 0 : changeRed);
                 changeGreen = changeGreen > 255 ? 255 : (changeGreen < 0 ? 0 : changeGreen);
                 changeBlue = changeBlue > 255 ? 255 : (changeBlue < 0 ? 0 : changeBlue);
@@ -165,6 +170,10 @@ public class ColorRatio implements Algorithm {
      */
     public int colorRatio(ColorEnum colorEnum) {
         BufferedImage image = iaPanel.getContent().getImage();
+        if (null == image) {
+            logger.error("请先打开一张图片");
+            return 0;
+        }
         int width = image.getData().getWidth();
         int height = image.getData().getHeight();
         long sum = 0;

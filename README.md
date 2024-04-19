@@ -12,6 +12,9 @@ Java Swing 图像处理 算法学习
 右键菜单
 ![右键菜单](image/右键菜单.png)
 
+信息
+![信息](image/信息.png)
+
 图像读取
 ![图像读取](image/图像读取.png)
 
@@ -26,6 +29,12 @@ Java Swing 图像处理 算法学习
 
 颜色占比
 ![颜色占比](image/颜色比例调整.png)
+
+色阶
+![色阶](image/色阶.png)
+
+马赛克
+![马赛克](image/马赛克.png)
 
 关于
 ![关于](image/关于.png)
@@ -44,8 +53,8 @@ Java Swing 图像处理 算法学习
 
 3. 算法类实现`org.sauceggplant.ia.algorithm.Algorithm`接口
 
-实现方法
-```
+实现方法`public void run(IaPanel iaPanel)`
+```java
 @Override
 public void run(IaPanel iaPanel){
         //打开的图像，文件路径

@@ -1,17 +1,13 @@
 package org.sauceggplant.ia.algorithm;
 
-import ch.qos.logback.core.util.StringUtil;
 import org.sauceggplant.ia.ui.IaPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * 缩放
@@ -38,7 +34,7 @@ public class Zoom implements Algorithm {
         slider.setPaintLabels(true);
         slider.setPaintTicks(true);
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
-        dialog.setTitle("缩放百分比");
+        dialog.setTitle("缩放百分比(%)");
         dialog.setPreferredSize(new Dimension(500, 100));
         dialog.setSize(new Dimension(500, 100));
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -49,18 +45,14 @@ public class Zoom implements Algorithm {
         ok.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int value = slider.getValue();
-                if (StringUtil.isNullOrEmpty(iaPanel.getPath())) {
-                    logger.error("图片文件路径为空，请先打开一张图片");
-                    return;
-                }
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(new File(iaPanel.getPath()));
+                BufferedImage bufferedImage = iaPanel.getContent().getImage();
+                if (null != bufferedImage) {
+                    int value = slider.getValue();
                     double rate = value / 100.0D;
                     logger.info("图片缩放比例:{}", rate);
                     iaPanel.getOutput().setImage(zoom(bufferedImage, rate));
-                } catch (IOException e1) {
-                    logger.error("图片文件路径:{}", iaPanel.getPath(), e1);
+                } else {
+                    logger.error("请先打开一张图片");
                 }
                 dialog.setVisible(false);
             }

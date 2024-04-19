@@ -1,17 +1,13 @@
 package org.sauceggplant.ia.algorithm;
 
-import ch.qos.logback.core.util.StringUtil;
 import org.sauceggplant.ia.ui.IaPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * 二值化
@@ -51,15 +47,11 @@ public class Binarization implements Algorithm {
             public void actionPerformed(ActionEvent e) {
                 int value = slider.getValue();
                 logger.info("二值化阈值:{}", value);
-                if (StringUtil.isNullOrEmpty(iaPanel.getPath())) {
-                    logger.error("图片文件路径为空，请先打开一张图片");
-                    return;
-                }
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(new File(iaPanel.getPath()));
+                BufferedImage bufferedImage = iaPanel.getContent().getImage();
+                if (null != bufferedImage) {
                     iaPanel.getOutput().setImage(binarization(bufferedImage, value));
-                } catch (IOException e1) {
-                    logger.error("图片文件路径:{}", iaPanel.getPath(), e1);
+                } else {
+                    logger.error("请先打开一张图片");
                 }
                 dialog.setVisible(false);
             }
@@ -70,8 +62,9 @@ public class Binarization implements Algorithm {
 
     /**
      * 二值化处理算法
+     *
      * @param bufferedImage 图像
-     * @param value 阈值
+     * @param value         阈值
      * @return 二值化处理后的图像
      */
     public BufferedImage binarization(BufferedImage bufferedImage, int value) {

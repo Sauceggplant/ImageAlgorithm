@@ -33,13 +33,21 @@ public class Info implements Algorithm {
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
+
+        int width = 0, height = 0;
+        if (null != iaPanel.getContent().getImage()) {
+            width = iaPanel.getContent().getImage().getWidth();
+            height = iaPanel.getContent().getImage().getHeight();
+        } else {
+            logger.error("请先打开一张图片");
+        }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("宽度:"));
-        JLabel width = new JLabel("" + iaPanel.getContent().getImage().getWidth());
-        jPanel.add(width);
+        JLabel widthLabel = new JLabel("" + width);
+        jPanel.add(widthLabel);
         jPanel.add(new JLabel("高度:"));
-        JLabel height = new JLabel("" + iaPanel.getContent().getImage().getHeight());
-        jPanel.add(height);
+        JLabel heightLabel = new JLabel("" + height);
+        jPanel.add(heightLabel);
         dialog.getContentPane().add(jPanel, BorderLayout.CENTER);
         JButton close = new JButton("关闭");
         close.addActionListener(new AbstractAction() {

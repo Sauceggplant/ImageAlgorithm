@@ -1,15 +1,11 @@
 package org.sauceggplant.ia.algorithm;
 
-import ch.qos.logback.core.util.StringUtil;
 import org.sauceggplant.ia.ui.IaPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * 灰度
@@ -29,20 +25,17 @@ public class Gray implements Algorithm {
     @Override
     public void run(IaPanel iaPanel) {
         logger.info("菜单：灰度");
-        if (StringUtil.isNullOrEmpty(iaPanel.getPath())) {
-            logger.error("图片文件路径为空，请先打开一张图片");
-            return;
-        }
-        try {
-            BufferedImage bufferedImage = ImageIO.read(new File(iaPanel.getPath()));
+        BufferedImage bufferedImage = iaPanel.getContent().getImage();
+        if (null != bufferedImage) {
             iaPanel.getOutput().setImage(gray(bufferedImage));
-        } catch (IOException e1) {
-            logger.error("图片文件路径:{}", iaPanel.getPath(), e1);
+        } else {
+            logger.error("请先打开一张图片");
         }
     }
 
     /**
      * 图像灰度算法
+     *
      * @param bufferedImage 图像
      * @return 灰度处理后图像
      */
