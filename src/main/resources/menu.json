@@ -1,0 +1,74 @@
+[
+  {
+    "name": "文件",
+    "text": "<html><U>F</U>文件",
+    "icon": "icon.png",
+    "mnemonic": "F",
+    "menuItemList": [
+      {
+        "name": "open",
+        "text": "<html><U>O</U>打开",
+        "icon": "icon.png",
+        "accelerator": 79
+      },
+      {
+        "name": "save",
+        "text": "<html><U>S</U>存储",
+        "icon": "icon.png",
+        "accelerator": 83
+      },
+      {
+        "name": "quit",
+        "text": "<html><U>Q</U>退出",
+        "icon": "icon.png",
+        "accelerator": 81
+      }
+    ]
+  },
+  {
+    "name": "执行",
+    "text": "<html><U>R</U>执行",
+    "icon": "icon.png",
+    "mnemonic": "R",
+    "menuItemList": [
+      {
+        "name": "zoom",
+        "text": "<html><U>Z</U>缩放",
+        "icon": "icon.png",
+        "accelerator": 90
+      },
+      {
+        "name": "gray",
+        "text": "<html><U>G</U>灰度",
+        "icon": "icon.png",
+        "accelerator": 71
+      },
+      {
+        "name": "binarization",
+        "text": "<html><U>B</U>二值化",
+        "icon": "icon.png",
+        "accelerator": 66
+      },
+      {
+        "name": "info",
+        "text": "<html><U>I</U>信息",
+        "icon": "icon.png",
+        "accelerator": 73
+      }
+    ]
+  },
+  {
+    "name": "帮助",
+    "text": "<html><U>H</U>帮助",
+    "icon": "icon.png",
+    "mnemonic": "H",
+    "menuItemList": [
+      {
+        "name": "about",
+        "text": "<html><U>A</U>关于",
+        "icon": "icon.png",
+        "accelerator": 65
+      }
+    ]
+  }
+]
