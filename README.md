@@ -1,6 +1,72 @@
 # ImageAlgorithm
 Java Swing 图像处理 算法学习
 
+## 原理
+
+Java 通过 `java.awt.image.BufferedImage`类，对图像进行加工处理，
+
+在RGB(计算机的三原色，R-red:红,G-green:绿,B-blue:蓝)色彩空间中，
+
+可以理解为图像由三个矩阵(红色矩阵，绿色矩阵，蓝色矩阵)组成，
+
+矩阵的行就是图像的宽， 矩阵的列就是图像的高，
+
+图像的每个像素，就可以通过(x,y,rgb)表示，
+
+即获取颜色`int rgb = BufferedImage.getRGB(int x, int y);`
+
+赋值`BufferedImage.setRGB(int x, int y, int rgb);`
+
+对于整型的rgb值，从`00000000-FFFFFFFF`,每2位16进制就代表一种含义，
+
+分别是透明度，红，绿，蓝；
+
+即
+```java
+int alpha = (rgb>>24)&0xFF;
+```
+```java
+int red = (rgb>>16)&0xFF;
+```
+```java
+int green = (rgb>>8)&0xFF;
+```
+```java
+int blue = rgb&0xFF;
+```
+
+`alpha`(0-完全透明,255-不透明),
+
+`red`(0-无红色,255-饱满红色),
+
+`green`(0-无绿色,255-饱满绿色),
+
+`blue`(0-无蓝色,255-饱满蓝色),
+
+计算机常用显示的颜色：
+
+黑色(red=0,green=0,blue=0)
+
+红色(red=255,green=0,blue=0)
+
+绿色(red=0,green=255,blue=0)
+
+蓝色(red=0,green=0,blue=255)
+
+灰色(red=128,green=128,blue=128)
+
+白色(red=255,green=255,blue=255)
+
+在Java的`swing`组件中，
+
+基于`javax.swing.JComponent`
+
+`public void paint(Graphics g)` 对界面绘制。
+
+坐标计算从左上角(0,0)开始计算，
+
+`Graphics`封装的较完善，可以直接对点、线、几何图形、图像、文字等直接绘制。
+
 ## 说明
 
 原图
