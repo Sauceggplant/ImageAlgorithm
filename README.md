@@ -24,6 +24,9 @@ Java Swing 图像处理 算法学习
 二值化
 ![二值化](image/二值化.png)
 
+颜色占比
+![颜色占比](image/颜色比例调整.png)
+
 关于
 ![关于](image/关于.png)
 
