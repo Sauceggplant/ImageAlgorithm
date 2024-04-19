@@ -88,6 +88,7 @@ public class IaPanel extends JTabbedPane {
         imagePanel.setLayout(new BorderLayout());
 
         iaPopupMenu = new IaPopupMenu(this);
+
         content = new IaImagePanel(null);
         content.addMouseListener(new MouseAdapter() {
             @Override

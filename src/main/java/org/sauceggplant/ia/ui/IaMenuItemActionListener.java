@@ -25,6 +25,7 @@ public class IaMenuItemActionListener implements ActionListener {
     private IaPanel iaPanel;
 
     public IaMenuItemActionListener(IaPanel iaPanel) {
+//        logger.info("IaMenuItemActionListener 构造");
         this.iaPanel = iaPanel;
     }
 

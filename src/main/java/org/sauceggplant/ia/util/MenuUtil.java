@@ -5,21 +5,28 @@ import org.sauceggplant.ia.ui.IaMenu;
 import org.sauceggplant.ia.ui.IaMenuItem;
 import org.sauceggplant.ia.ui.IaMenuItemActionListener;
 import org.sauceggplant.ia.ui.IaPanel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 /**
  * json实用类
  */
 public class MenuUtil {
+
+    /**
+     * 日志
+     */
+    private Logger logger = LoggerFactory.getLogger(MenuUtil.class);
 
     /**
      * 菜单项监听
@@ -42,6 +49,7 @@ public class MenuUtil {
     private static final String ICON_SIZE = "ia.ui.menu.icon.size";
 
     public MenuUtil(IaPanel iaPanel) {
+//        logger.info("MenuUtil 构造");
         iaMenuItemActionListener = new IaMenuItemActionListener(iaPanel);
     }
 
@@ -53,9 +61,16 @@ public class MenuUtil {
     public List<IaMenu> getIaMenuList() {
         String content = null;
         try {
-            content = new String(Files.readAllBytes(Paths.get(MenuUtil.class.getClassLoader().getResource("menu.json").toURI())));
-        } catch (IOException e) {
-        } catch (URISyntaxException e) {
+            InputStream is = MenuUtil.class.getClassLoader().getResourceAsStream("menu.json");
+//            logger.info("getIaMenuList:json file length:{}", is.available());
+            content = new BufferedReader(new InputStreamReader(is))
+                    .lines()
+                    .collect(Collectors.joining(
+                            System.lineSeparator()
+                    ));
+//            logger.info("getIaMenuList:content:{}", content);
+        } catch (Exception e) {
+            logger.error("getIaMenuList.error", e);
         }
         return JSONArray.parseArray(content, IaMenu.class);
     }
