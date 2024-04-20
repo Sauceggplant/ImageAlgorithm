@@ -80,6 +80,12 @@
         "accelerator": 51
       },
       {
+        "name": "rotate",
+        "text": "<html><U>R</U>旋转",
+        "icon": "icon.png",
+        "accelerator": 82
+      },
+      {
         "name": "convolution",
         "text": "<html><U>C</U>卷积",
         "icon": "icon.png",

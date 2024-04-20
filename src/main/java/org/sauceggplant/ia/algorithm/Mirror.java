@@ -48,7 +48,7 @@ public class Mirror implements Algorithm {
      */
     public void mirrorH() {
         BufferedImage image = iaPanel.getContent().getImage();
-        if(null == image) {
+        if (null == image) {
             logger.error("请先打开一张图片");
             return;
         }
@@ -69,7 +69,7 @@ public class Mirror implements Algorithm {
      */
     public void mirrorV() {
         BufferedImage image = iaPanel.getContent().getImage();
-        if(null == image) {
+        if (null == image) {
             logger.error("请先打开一张图片");
             return;
         }

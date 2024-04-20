@@ -110,6 +110,9 @@ int blue = rgb & 0xFF;
 镜像
 ![镜像](image/Mirror.png)
 
+旋转
+![旋转](image/Rotate.png)
+
 卷积
 ![卷积](image/Convolution.png)
 
