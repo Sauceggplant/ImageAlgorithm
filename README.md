@@ -113,6 +113,9 @@ int blue = rgb & 0xFF;
 旋转
 ![旋转](image/Rotate.png)
 
+高斯模糊
+![高斯模糊](image/GaussianBlur.png)
+
 卷积
 ![卷积](image/Convolution.png)
 
@@ -199,6 +202,38 @@ Prewitt垂直
 ```
 
 ![Laplacian2](image/convolution/Laplacian2.png)
+
+
+均值模糊
+
+```
+[[0.1111111111111111,  0.1111111111111111,  0.1111111111111111],
+[0.1111111111111111, 0.1111111111111111, 0.1111111111111111],
+[0.1111111111111111, 0.1111111111111111, 0.1111111111111111]]
+```
+
+![均值模糊](image/convolution/AvgBlur.png)
+
+
+高斯模糊
+
+```
+[[0.0625,   0.125,  0.0625],
+[0.125,     0.25,   0.125],
+[0.0625,    0.125,  0.0625]]
+```
+
+![GaussianBlur](image/convolution/GaussianBlur.png)
+
+高斯模糊，sigma=1，归一化
+
+```
+[[0.075,    0.124,  0.075],
+[0.124,     0.204,  0.124],
+[0.075,     0.124,  0.075]]
+```
+
+![GaussianBlur1](image/convolution/GaussianBlur1.png)
 
 关于
 ![关于](image/About.png)

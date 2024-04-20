@@ -86,6 +86,12 @@
         "accelerator": 82
       },
       {
+        "name": "gaussianBlur",
+        "text": "<html><U>4</U>高斯模糊",
+        "icon": "icon.png",
+        "accelerator": 52
+      },
+      {
         "name": "convolution",
         "text": "<html><U>C</U>卷积",
         "icon": "icon.png",
