@@ -57,21 +57,27 @@
       },
       {
         "name": "colorRatio",
-        "text": "<html><U>C</U>颜色占比",
+        "text": "<html><U>1</U>颜色占比",
         "icon": "icon.png",
-        "accelerator": 67
+        "accelerator": 49
       },
       {
         "name": "colorScale",
-        "text": "<html><U>1</U>色阶",
+        "text": "<html><U>2</U>色阶",
         "icon": "icon.png",
-        "accelerator": 49
+        "accelerator": 50
       },
       {
         "name": "mosaic",
         "text": "<html><U>M</U>马赛克",
         "icon": "icon.png",
         "accelerator": 77
+      },
+      {
+        "name": "convolution",
+        "text": "<html><U>C</U>卷积",
+        "icon": "icon.png",
+        "accelerator": 67
       }
     ]
   },

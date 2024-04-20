@@ -1,4 +1,5 @@
 # ImageAlgorithm
+
 Java Swing 图像处理 算法学习
 
 ## 原理
@@ -22,17 +23,21 @@ Java 通过 `java.awt.image.BufferedImage`类，对图像进行加工处理，
 分别是透明度，红，绿，蓝；
 
 即
+
 ```java
-int alpha = (rgb>>24)&0xFF;
+int alpha = (rgb >> 24) & 0xFF;
 ```
+
 ```java
-int red = (rgb>>16)&0xFF;
+int red = (rgb >> 16) & 0xFF;
 ```
+
 ```java
-int green = (rgb>>8)&0xFF;
+int green = (rgb >> 8) & 0xFF;
 ```
+
 ```java
-int blue = rgb&0xFF;
+int blue = rgb & 0xFF;
 ```
 
 `alpha`(0-完全透明,255-不透明),
@@ -70,37 +75,124 @@ int blue = rgb&0xFF;
 ## 说明
 
 原图
-![原图](image/原图.png)
+![原图](image/Demo.png)
 
 页签（图像、输出、日志）
-![页签](image/日志.png)
+![页签](image/Log.png)
 
 右键菜单
-![右键菜单](image/右键菜单.png)
+![右键菜单](image/PopMenu.png)
 
 信息
-![信息](image/信息.png)
+![信息](image/Info.png)
 
 图像读取
-![图像读取](image/图像读取.png)
+![图像读取](image/Open.png)
 
 比例缩放
-![比例缩放](image/图像比例缩放.png)
+![比例缩放](image/Zoom.png)
 
 灰度
-![灰度](image/灰度.png)
+![灰度](image/Gray.png)
 
 二值化
-![二值化](image/二值化.png)
+![二值化](image/Binarization.png)
 
 颜色占比
-![颜色占比](image/颜色比例调整.png)
+![颜色占比](image/ColorRatio.png)
 
 色阶
-![色阶](image/色阶.png)
+![色阶](image/ColorScale.png)
 
 马赛克
-![马赛克](image/马赛克.png)
+![马赛克](image/Mosaic.png)
+
+卷积
+![卷积](image/Convolution.png)
+
+对于卷积计算，目前支持3阶算子（Sobel、Prewitt、Laplacian）和自定义算子
+
+以下为灰度后卷积计算
+
+索贝尔(Sobel)水平
+
+```
+[[-1.0,  -2.0,   -1.0],
+[0.0,   0.0,    0.0],
+[1.0,   2.0,    1.0]]
+```
+
+![Sobel_H](image/convolution/Sobel_H.png)
+
+索贝尔(Sobel)垂直
+
+```
+[[-1.0, 0.0,    1.0],
+[-2.0,  0.0,    2.0],
+[-1.0,  0.0,    1.0]]
+```
+
+![Sobel_V](image/convolution/Sobel_V.png)
+
+Prewitt水平
+
+```
+[[1.0,  1.0,    1.0],
+[0.0,   0.0,    0.0],
+[-1.0,  -1.0,   -1.0]]
+```
+
+![Sobel_H](image/convolution/Prewitt_H.png)
+
+Prewitt垂直
+
+```
+[[1.0,  0.0,    -1.0],
+[1.0,    0.0,    -1.0],
+[1.0,   0.0,    -1.0]]
+```
+
+![Sobel_V](image/convolution/Prewitt_V.png)
+
+拉普拉斯(Laplacian)4
+
+```
+[[0.0,  1.0,    0.0
+1.0,    -4.0,   1.0
+0.0,    1.0,    0.0]]
+```
+
+![Laplacian4](image/convolution/Laplacian4.png)
+
+拉普拉斯(Laplacian)8
+
+```
+[[1.0,  1.0,    1.0],
+[1.0,   -8.0,   1.0],
+[1.0,   1.0,    1.0]]
+```
+
+![Laplacian8](image/convolution/Laplacian8.png)
+
+拉普拉斯(Laplacian)变形1
+
+```
+[[-1.0,  -0.5,    -1.0],
+[-0.5,   6.0,   -0.5],
+[-1.0,   -0.5,    -1.0]]
+```
+
+![Laplacian1](image/convolution/Laplacian1.png)
+
+拉普拉斯(Laplacian)变形2
+
+```
+[[1.0,  0.5,    1.0],
+[0.5,   -6.0,   0.5],
+[1.0,   0.5,    1.0]]
+```
+
+![Laplacian2](image/convolution/Laplacian2.png)
 
 关于
 ![关于](image/关于.png)
@@ -108,9 +200,11 @@ int blue = rgb&0xFF;
 ## 自定义算法
 
 1. 在
+
 ```
 \ImageAlgorithm\src\main\resources\menu.json
 ```
+
 增加菜单项目
 
 2. 菜单项的`name`对应`org.sauceggplant.ia.algorithm`中的类
@@ -120,35 +214,37 @@ int blue = rgb&0xFF;
 3. 算法类实现`org.sauceggplant.ia.algorithm.Algorithm`接口
 
 实现方法`public void run(IaPanel iaPanel)`
+
 ```java
+
 @Override
-public void run(IaPanel iaPanel){
-        //打开的图像，文件路径
-        String imagePath = iaPanel.getPath();
-        //打开的图像，数据
-        BufferedImage imageData = iaPanel.getContent().getImage();
+public void run(IaPanel iaPanel) {
+    //打开的图像，文件路径
+    String imagePath = iaPanel.getPath();
+    //打开的图像，数据
+    BufferedImage imageData = iaPanel.getContent().getImage();
 
-        //获取图像中某个像素点的颜色,屏幕左上角坐标为(0,0),右下角坐标为(width-1,height-1)
-        int rgb = imageData.getRGB(int x, int y);
-        java.awt.Color c = new java.awt.Color(rgb);
-        int red = c.getRed();       //红色 0--255
-        int green = c.getGreen();   //绿色 0--255
-        int blue = c.getBlue();     //蓝色 0--255
-        int alpha = c.getAlpha();   //透明度
+    //获取图像中某个像素点的颜色,屏幕左上角坐标为(0,0),右下角坐标为(width-1,height-1)
+    int rgb = imageData.getRGB( int x, int y);
+    java.awt.Color c = new java.awt.Color(rgb);
+    int red = c.getRed();       //红色 0--255
+    int green = c.getGreen();   //绿色 0--255
+    int blue = c.getBlue();     //蓝色 0--255
+    int alpha = c.getAlpha();   //透明度
 
-        //构建颜色,RGB色彩空间
-        // (当 red=0,green=0,blue=0时，为黑色)
-        // (当 red=255,green=255,blue=255时，为白色)
-        java.awt.Color c1 = new java.awt.Color(red,green,blue,alpha);
-        //变更某个像素点的颜色
-        imageData.setRGB(int x, int y, c1.getRGB());
+    //构建颜色,RGB色彩空间
+    // (当 red=0,green=0,blue=0时，为黑色)
+    // (当 red=255,green=255,blue=255时，为白色)
+    java.awt.Color c1 = new java.awt.Color(red, green, blue, alpha);
+    //变更某个像素点的颜色
+    imageData.setRGB( int x, int y, c1.getRGB());
 
-        //图像页签
-        IaImagePanel content = iaPanel.getContent();
-        //输出页签
-        IaImagePanel output = iaPanel.getOutput();
-        
-        //将加工后的图像信息展示到输出页签
-        output.setImage(imageData);
+    //图像页签
+    IaImagePanel content = iaPanel.getContent();
+    //输出页签
+    IaImagePanel output = iaPanel.getOutput();
+
+    //将加工后的图像信息展示到输出页签
+    output.setImage(imageData);
 }
 ```
