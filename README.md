@@ -107,6 +107,9 @@ int blue = rgb & 0xFF;
 马赛克
 ![马赛克](image/Mosaic.png)
 
+镜像
+![镜像](image/Mirror.png)
+
 卷积
 ![卷积](image/Convolution.png)
 
@@ -195,7 +198,7 @@ Prewitt垂直
 ![Laplacian2](image/convolution/Laplacian2.png)
 
 关于
-![关于](image/关于.png)
+![关于](image/About.png)
 
 ## 自定义算法
 

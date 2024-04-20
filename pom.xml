@@ -6,7 +6,7 @@
 
     <groupId>org.sauceggplant</groupId>
     <artifactId>image-algorithm</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>ImageAlgorithm</name>
     <description>图像算法</description>

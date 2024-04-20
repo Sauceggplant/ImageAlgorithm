@@ -61,6 +61,7 @@ public class Gray implements Algorithm {
         BufferedImage bufferedImage = iaPanel.getContent().getImage();
         if (null == bufferedImage) {
             logger.error("请先打开一张图片");
+            return;
         }
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
         dialog.setTitle("灰度图像,颜色占比调整");

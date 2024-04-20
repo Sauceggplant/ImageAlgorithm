@@ -74,6 +74,12 @@
         "accelerator": 77
       },
       {
+        "name": "mirror",
+        "text": "<html><U>3</U>镜像",
+        "icon": "icon.png",
+        "accelerator": 51
+      },
+      {
         "name": "convolution",
         "text": "<html><U>C</U>卷积",
         "icon": "icon.png",

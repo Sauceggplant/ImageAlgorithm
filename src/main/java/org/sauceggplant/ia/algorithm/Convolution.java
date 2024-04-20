@@ -46,6 +46,11 @@ public class Convolution implements Algorithm {
     public void run(IaPanel iaPanel) {
         logger.info("菜单：卷积");
 
+        if (null == iaPanel.getContent().getImage()) {
+            logger.error("请先打开一张图片");
+            return;
+        }
+
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
