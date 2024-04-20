@@ -114,6 +114,10 @@ int blue = rgb & 0xFF;
 ![旋转](image/Rotate.png)
 
 高斯模糊
+
+计算公式：
+![公式](image/Gaussian.png)
+
 ![高斯模糊](image/GaussianBlur.png)
 
 卷积
