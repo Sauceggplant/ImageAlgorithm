@@ -33,6 +33,36 @@ public class IaPanel extends JTabbedPane {
     private static final String INIT_PANEL_DONE = "ia.ui.panel.init.done";
 
     /**
+     * 图像icon
+     */
+    private static final String IMAGE_ICON = "ia.ui.panel.image.icon";
+
+    /**
+     * 输出icon
+     */
+    private static final String OUTPUT_ICON = "ia.ui.panel.output.icon";
+
+    /**
+     * 日志icon
+     */
+    private static final String LOG_ICON = "ia.ui.panel.log.icon";
+
+    /**
+     * icon size
+     */
+    private static final String ICON_SIZE = "ia.ui.panel.icon.size";
+
+    /**
+     * 文字
+     */
+    private static final String FONT = "ia.ui.panel.font";
+
+    /**
+     * 文字大小
+     */
+    private static final String FONT_SIZE = "ia.ui.panel.font.size";
+
+    /**
      * parent
      */
     private IaWindow iaWindow;
@@ -81,10 +111,12 @@ public class IaPanel extends JTabbedPane {
 
     protected void init() {
         logger.info(PropertiesUtil.getProperty(INIT_PANEL));
-        this.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        this.setFont(new Font(PropertiesUtil.getProperty(FONT), Font.PLAIN,
+                Integer.parseInt(PropertiesUtil.getProperty(FONT_SIZE))));
 
         JPanel imagePanel = new JPanel();
-        imagePanel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        imagePanel.setFont(new Font(PropertiesUtil.getProperty(FONT), Font.PLAIN,
+                Integer.parseInt(PropertiesUtil.getProperty(FONT_SIZE))));
         imagePanel.setLayout(new BorderLayout());
 
         iaPopupMenu = new IaPopupMenu(this);
@@ -102,11 +134,13 @@ public class IaPanel extends JTabbedPane {
         });
         contentPane = new JScrollPane(content);
         imagePanel.add(BorderLayout.CENTER, contentPane);
-        this.addTab("图像", IconUtil.getIcon("icon.png", "图像", 16), imagePanel);
+        this.addTab("图像", IconUtil.getIcon(PropertiesUtil.getProperty(IMAGE_ICON), "图像",
+                Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))), imagePanel);
 
         JPanel outputPanel = new JPanel();
         outputPanel.add(new JLabel("输出"));
-        outputPanel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        outputPanel.setFont(new Font(PropertiesUtil.getProperty(FONT), Font.PLAIN,
+                Integer.parseInt(PropertiesUtil.getProperty(FONT_SIZE))));
         outputPanel.setLayout(new BorderLayout());
         output = new IaImagePanel(null);
         output.addMouseListener(new MouseAdapter() {
@@ -121,13 +155,26 @@ public class IaPanel extends JTabbedPane {
         });
         outputPane = new JScrollPane(output);
         outputPanel.add(BorderLayout.CENTER, outputPane);
-        this.addTab("输出", IconUtil.getIcon("icon.png", "输出", 16), outputPanel);
+        this.addTab("输出", IconUtil.getIcon(PropertiesUtil.getProperty(OUTPUT_ICON), "输出",
+                Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))), outputPanel);
 
         JPanel logPanel = new JPanel();
-        logPanel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        logPanel.setFont(new Font(PropertiesUtil.getProperty(FONT), Font.PLAIN,
+                Integer.parseInt(PropertiesUtil.getProperty(FONT_SIZE))));
         logPanel.setLayout(new BorderLayout());
         logPanel.add(BorderLayout.CENTER, new JScrollPane(logArea));
-        this.addTab("日志", IconUtil.getIcon("icon.png", "日志", 16), logPanel);
+        this.addTab("日志", IconUtil.getIcon(PropertiesUtil.getProperty(LOG_ICON), "日志",
+                Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))), logPanel);
+        LogPopMenu logPopMenu = new LogPopMenu(logArea);
+        logArea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    logPopMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
 
         this.setSelectedIndex(0);
         this.addChangeListener(new ChangeListener() {

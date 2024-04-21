@@ -51,9 +51,9 @@ public class IaPopupMenu extends JPopupMenu {
 
         menuUtil = new MenuUtil(iaPanel);
         java.util.List<IaMenu> iaMenuList = menuUtil.getIaMenuList();
-        logger.info("菜单项列表:{}", iaMenuList);
+        //logger.info("菜单项列表:{}", iaMenuList);
         for (IaMenu iaMenu : iaMenuList) {
-            List<JMenuItem> jMenuItemList = menuUtil.buildMenuItemList(iaMenu);
+            List<JMenuItem> jMenuItemList = menuUtil.buildMenuItemList(iaMenu, true);
             for (JMenuItem jMenuItem : jMenuItemList) {
                 logger.info("添加菜单项:{}",jMenuItem.getName());
                 this.add(jMenuItem);

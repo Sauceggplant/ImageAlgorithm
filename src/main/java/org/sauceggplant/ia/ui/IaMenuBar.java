@@ -60,7 +60,7 @@ public class IaMenuBar extends JMenuBar {
         List<IaMenu> iaMenuList = menuUtil.getIaMenuList();
         for (IaMenu iaMenu : iaMenuList) {
             JMenu jMenu = menuUtil.buildMenu(iaMenu);
-            List<JMenuItem> jMenuItemList = menuUtil.buildMenuItemList(iaMenu);
+            List<JMenuItem> jMenuItemList = menuUtil.buildMenuItemList(iaMenu, false);
             for (JMenuItem jMenuItem : jMenuItemList) {
                 jMenu.add(jMenuItem);
             }

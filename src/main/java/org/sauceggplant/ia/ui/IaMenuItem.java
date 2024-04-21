@@ -25,6 +25,12 @@ public class IaMenuItem {
      */
     private String accelerator;
 
+    /**
+     * 是否添加右键菜单
+     * false-右键菜单不显示该功能
+     */
+    private Boolean popMenu = true;
+
     public String getName() {
         return name;
     }
@@ -55,5 +61,13 @@ public class IaMenuItem {
 
     public void setAccelerator(String accelerator) {
         this.accelerator = accelerator;
+    }
+
+    public Boolean getPopMenu() {
+        return popMenu;
+    }
+
+    public void setPopMenu(Boolean popMenu) {
+        this.popMenu = popMenu;
     }
 }

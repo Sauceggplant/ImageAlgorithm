@@ -2,99 +2,102 @@
   {
     "name": "文件",
     "text": "<html><U>F</U>文件",
-    "icon": "icon.png",
+    "icon": "file.png",
     "mnemonic": "F",
     "menuItemList": [
       {
         "name": "open",
         "text": "<html><U>O</U>打开",
-        "icon": "icon.png",
-        "accelerator": 79
+        "icon": "open.png",
+        "accelerator": 79,
+        "popMenu": false
       },
       {
         "name": "save",
         "text": "<html><U>S</U>存储",
-        "icon": "icon.png",
-        "accelerator": 83
+        "icon": "save.png",
+        "accelerator": 83,
+        "popMenu": false
       },
       {
         "name": "quit",
         "text": "<html><U>Q</U>退出",
-        "icon": "icon.png",
-        "accelerator": 81
+        "icon": "quit.png",
+        "accelerator": 81,
+        "popMenu": false
       }
     ]
   },
   {
     "name": "执行",
     "text": "<html><U>R</U>执行",
-    "icon": "icon.png",
+    "icon": "execute.png",
     "mnemonic": "R",
     "menuItemList": [
       {
         "name": "info",
         "text": "<html><U>I</U>信息",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 73
       },
       {
         "name": "zoom",
         "text": "<html><U>Z</U>缩放",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 90
       },
       {
         "name": "gray",
         "text": "<html><U>G</U>灰度",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 71
       },
       {
         "name": "binarization",
         "text": "<html><U>B</U>二值化",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 66
       },
       {
         "name": "colorRatio",
         "text": "<html><U>1</U>颜色占比",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 49
       },
       {
         "name": "colorScale",
         "text": "<html><U>2</U>色阶",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 50
       },
       {
         "name": "mosaic",
         "text": "<html><U>M</U>马赛克",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 77
       },
       {
         "name": "mirror",
         "text": "<html><U>3</U>镜像",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 51
       },
       {
         "name": "rotate",
         "text": "<html><U>R</U>旋转",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 82
       },
       {
         "name": "gaussianBlur",
         "text": "<html><U>4</U>高斯模糊",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 52
       },
       {
         "name": "convolution",
         "text": "<html><U>C</U>卷积",
-        "icon": "icon.png",
+        "icon": "default.png",
         "accelerator": 67
       }
     ]
@@ -102,14 +105,15 @@
   {
     "name": "帮助",
     "text": "<html><U>H</U>帮助",
-    "icon": "icon.png",
+    "icon": "help.png",
     "mnemonic": "H",
     "menuItemList": [
       {
         "name": "about",
         "text": "<html><U>A</U>关于",
-        "icon": "icon.png",
-        "accelerator": 65
+        "icon": "about.png",
+        "accelerator": 65,
+        "popMenu": false
       }
     ]
   }

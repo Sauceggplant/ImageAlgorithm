@@ -92,11 +92,15 @@ public class MenuUtil {
      * 菜单项列表
      *
      * @param iaMenu 菜单项列表
+     * @param popMenu 是否右键菜单
      * @return 菜单项
      */
-    public List<JMenuItem> buildMenuItemList(IaMenu iaMenu) {
+    public List<JMenuItem> buildMenuItemList(IaMenu iaMenu, boolean popMenu) {
         List<JMenuItem> jMenuItemList = new ArrayList<>();
         for (IaMenuItem jMenuItem : iaMenu.getMenuItemList()) {
+            if(popMenu && !jMenuItem.getPopMenu()) {
+                continue;
+            }
             jMenuItemList.add(buildMenuItem(
                     jMenuItem.getName(),
                     jMenuItem.getText(),
