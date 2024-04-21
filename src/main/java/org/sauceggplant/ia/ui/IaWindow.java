@@ -120,6 +120,11 @@ public class IaWindow extends JFrame {
     private JTextArea logArea = new JTextArea(10, 80);
 
     /**
+     * 工具栏
+     */
+    private IaToolBar toolBar;
+
+    /**
      * 默认构造
      */
     public IaWindow() {
@@ -196,6 +201,12 @@ public class IaWindow extends JFrame {
         IaPanel iaPanel = new IaPanel(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT, logArea, this);
         this.getContentPane().add(BorderLayout.CENTER, iaPanel);
         this.setJMenuBar(new IaMenuBar(iaPanel));
+        toolBar = new IaToolBar(iaPanel);
+        this.getContentPane().add(BorderLayout.PAGE_START, toolBar);
         logger.info(PropertiesUtil.getProperty(INIT_COMPONENT_DONE));
+    }
+
+    public IaToolBar getToolBar() {
+        return toolBar;
     }
 }

@@ -48,6 +48,11 @@ public class MenuUtil {
      */
     private static final String ICON_SIZE = "ia.ui.menu.icon.size";
 
+    /**
+     * 图标大小
+     */
+    private static final String TOOL_ICON_SIZE = "ia.ui.toolbar.icon.size";
+
     public MenuUtil(IaPanel iaPanel) {
 //        logger.info("MenuUtil 构造");
         iaMenuItemActionListener = new IaMenuItemActionListener(iaPanel);
@@ -151,5 +156,43 @@ public class MenuUtil {
         int fontSize = Integer.parseInt(PropertiesUtil.getProperty(FONT_SIZE));
         menuItem.setFont(new Font(PropertiesUtil.getProperty(FONT), Font.PLAIN, fontSize));
         return menuItem;
+    }
+
+    /**
+     * 构建工具栏按钮
+     * @param iaMenu 菜单
+     * @return 工具栏按钮列表
+     */
+    public List<JButton> buildToolBarItemList(IaMenu iaMenu) {
+        List<JButton> jButtonList = new ArrayList<>();
+        for (IaMenuItem jMenuItem : iaMenu.getMenuItemList()) {
+            if(!jMenuItem.getToolBar()) {
+                continue;
+            }
+            jButtonList.add(buildToolBarItem(
+                    jMenuItem.getName(),
+                    jMenuItem.getText(),
+                    jMenuItem.getIcon()));
+        }
+        return jButtonList;
+    }
+
+    /**
+     * 构建工具栏按钮
+     * @param name 名称
+     * @param text 文案
+     * @param icon 图标
+     * @return 按钮
+     */
+    private JButton buildToolBarItem(String name, String text, String icon) {
+        JButton button = new JButton();
+        button.setActionCommand(name);
+        button.setName(text);
+        button.setFocusable(false);
+        button.setToolTipText(text);
+        button.setIcon(IconUtil.getIcon(icon, text, Integer.parseInt(PropertiesUtil.getProperty(TOOL_ICON_SIZE))));
+        button.setBorder(null);
+        button.addActionListener(iaMenuItemActionListener);
+        return button;
     }
 }

@@ -10,21 +10,24 @@
         "text": "<html><U>O</U>打开",
         "icon": "open.png",
         "accelerator": 79,
-        "popMenu": false
+        "popMenu": false,
+        "toolBar": true
       },
       {
         "name": "save",
         "text": "<html><U>S</U>存储",
         "icon": "save.png",
         "accelerator": 83,
-        "popMenu": false
+        "popMenu": false,
+        "toolBar": true
       },
       {
         "name": "quit",
         "text": "<html><U>Q</U>退出",
         "icon": "quit.png",
         "accelerator": 81,
-        "popMenu": false
+        "popMenu": false,
+        "toolBar": true
       }
     ]
   },
@@ -109,11 +112,19 @@
     "mnemonic": "H",
     "menuItemList": [
       {
+        "name": "toolbar",
+        "text": "<html><U>T</U>工具栏",
+        "icon": "tool.png",
+        "accelerator": 84,
+        "popMenu": false
+      },
+      {
         "name": "about",
         "text": "<html><U>A</U>关于",
         "icon": "about.png",
         "accelerator": 65,
-        "popMenu": false
+        "popMenu": false,
+        "toolBar": true
       }
     ]
   }

@@ -31,24 +31,41 @@ public class IaMenuItemActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!(e.getSource() instanceof JMenuItem)) {
-            return;
+        if (e.getSource() instanceof JMenuItem) {
+            JMenuItem menuItem = ((JMenuItem) e.getSource());
+            logger.info("菜单项:{}", menuItem.getName());
+            try {
+                Class<?> clazz = Class.forName("org.sauceggplant.ia.algorithm."
+                        + Character.toUpperCase(menuItem.getName().charAt(0))
+                        + menuItem.getName().substring(1));
+                logger.info("反射调用类:{}#run", clazz.getName());
+                Method method = clazz.getMethod("run", IaPanel.class);
+                Object instance = clazz.newInstance();
+                method.invoke(instance, iaPanel);
+            } catch (ClassNotFoundException ex) {
+            } catch (NoSuchMethodException ex) {
+            } catch (InvocationTargetException ex) {
+            } catch (IllegalAccessException ex) {
+            } catch (InstantiationException ex) {
+            }
         }
-        JMenuItem menuItem = ((JMenuItem) e.getSource());
-        logger.info("菜单项:{}", menuItem.getName());
-        try {
-            Class<?> clazz = Class.forName("org.sauceggplant.ia.algorithm."
-                    + Character.toUpperCase(menuItem.getName().charAt(0))
-                    + menuItem.getName().substring(1));
-            logger.info("反射调用类:{}#run", clazz.getName());
-            Method method = clazz.getMethod("run", IaPanel.class);
-            Object instance = clazz.newInstance();
-            method.invoke(instance, iaPanel);
-        } catch (ClassNotFoundException ex) {
-        } catch (NoSuchMethodException ex) {
-        } catch (InvocationTargetException ex) {
-        } catch (IllegalAccessException ex) {
-        } catch (InstantiationException ex) {
+        if (e.getSource() instanceof JButton) {
+            JButton button = ((JButton) e.getSource());
+            logger.info("工具栏:{}", button.getName());
+            try {
+                Class<?> clazz = Class.forName("org.sauceggplant.ia.algorithm."
+                        + Character.toUpperCase(button.getActionCommand().charAt(0))
+                        + button.getActionCommand().substring(1));
+                logger.info("反射调用类:{}#run", clazz.getName());
+                Method method = clazz.getMethod("run", IaPanel.class);
+                Object instance = clazz.newInstance();
+                method.invoke(instance, iaPanel);
+            } catch (ClassNotFoundException ex) {
+            } catch (NoSuchMethodException ex) {
+            } catch (InvocationTargetException ex) {
+            } catch (IllegalAccessException ex) {
+            } catch (InstantiationException ex) {
+            }
         }
     }
 }

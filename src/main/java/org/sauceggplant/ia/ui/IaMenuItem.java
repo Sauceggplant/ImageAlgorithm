@@ -31,6 +31,12 @@ public class IaMenuItem {
      */
     private Boolean popMenu = true;
 
+    /**
+     * 是否添加工具栏
+     * false-工具栏不显示该功能
+     */
+    private Boolean toolBar = false;
+
     public String getName() {
         return name;
     }
@@ -69,5 +75,13 @@ public class IaMenuItem {
 
     public void setPopMenu(Boolean popMenu) {
         this.popMenu = popMenu;
+    }
+
+    public Boolean getToolBar() {
+        return toolBar;
+    }
+
+    public void setToolBar(Boolean toolBar) {
+        this.toolBar = toolBar;
     }
 }
