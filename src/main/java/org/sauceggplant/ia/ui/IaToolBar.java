@@ -1,5 +1,6 @@
 package org.sauceggplant.ia.ui;
 
+import org.sauceggplant.ia.pojo.IaMenu;
 import org.sauceggplant.ia.util.MenuUtil;
 import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;

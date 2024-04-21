@@ -26,8 +26,7 @@
         "text": "<html><U>Q</U>退出",
         "icon": "quit.png",
         "accelerator": 81,
-        "popMenu": false,
-        "toolBar": true
+        "popMenu": false
       }
     ]
   },
@@ -40,68 +39,79 @@
       {
         "name": "info",
         "text": "<html><U>I</U>信息",
-        "icon": "default.png",
-        "accelerator": 73
+        "icon": "info.png",
+        "accelerator": 73,
+        "toolBar": true
       },
       {
         "name": "zoom",
         "text": "<html><U>Z</U>缩放",
-        "icon": "default.png",
-        "accelerator": 90
+        "icon": "zoom.png",
+        "accelerator": 90,
+        "toolBar": true
       },
       {
         "name": "gray",
         "text": "<html><U>G</U>灰度",
-        "icon": "default.png",
-        "accelerator": 71
+        "icon": "gray.png",
+        "accelerator": 71,
+        "toolBar": true
       },
       {
         "name": "binarization",
         "text": "<html><U>B</U>二值化",
-        "icon": "default.png",
-        "accelerator": 66
+        "icon": "binarization.png",
+        "accelerator": 66,
+        "toolBar": true
       },
       {
         "name": "colorRatio",
         "text": "<html><U>1</U>颜色占比",
-        "icon": "default.png",
-        "accelerator": 49
+        "icon": "colorRatio.png",
+        "accelerator": 49,
+        "toolBar": true
       },
       {
         "name": "colorScale",
         "text": "<html><U>2</U>色阶",
-        "icon": "default.png",
-        "accelerator": 50
+        "icon": "colorScale.png",
+        "accelerator": 50,
+        "toolBar": true
       },
       {
         "name": "mosaic",
         "text": "<html><U>M</U>马赛克",
-        "icon": "default.png",
-        "accelerator": 77
+        "icon": "mosaic.png",
+        "accelerator": 77,
+        "toolBar": true
       },
       {
         "name": "mirror",
         "text": "<html><U>3</U>镜像",
-        "icon": "default.png",
-        "accelerator": 51
+        "icon": "mirror.png",
+        "accelerator": 51,
+        "toolBar": true
       },
       {
         "name": "rotate",
         "text": "<html><U>R</U>旋转",
-        "icon": "default.png",
-        "accelerator": 82
+        "icon": "rotate.png",
+        "accelerator": 82,
+        "toolBar": true
       },
       {
         "name": "gaussianBlur",
         "text": "<html><U>4</U>高斯模糊",
-        "icon": "default.png",
-        "accelerator": 52
+        "icon": "blur.png",
+        "accelerator": 52,
+        "toolBar": true
       },
       {
         "name": "convolution",
         "text": "<html><U>C</U>卷积",
-        "icon": "default.png",
-        "accelerator": 67
+        "icon": "convolution.png",
+        "accelerator": 67,
+        "toolBar": true
       }
     ]
   },
@@ -123,8 +133,7 @@
         "text": "<html><U>A</U>关于",
         "icon": "about.png",
         "accelerator": 65,
-        "popMenu": false,
-        "toolBar": true
+        "popMenu": false
       }
     ]
   }

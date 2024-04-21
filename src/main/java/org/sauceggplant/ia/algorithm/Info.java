@@ -25,7 +25,11 @@ public class Info implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：信息");
+        logger.info("Info:信息");
+        if (null == iaPanel.getContent().getImage()) {
+            logger.error("请先打开一张图片");
+            return;
+        }
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
         dialog.setTitle("图像信息");
         dialog.setPreferredSize(new Dimension(400, 300));
@@ -33,14 +37,8 @@ public class Info implements Algorithm {
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
-
-        int width = 0, height = 0;
-        if (null != iaPanel.getContent().getImage()) {
-            width = iaPanel.getContent().getImage().getWidth();
-            height = iaPanel.getContent().getImage().getHeight();
-        } else {
-            logger.error("请先打开一张图片");
-        }
+        int width = iaPanel.getContent().getImage().getWidth();
+        int height = iaPanel.getContent().getImage().getHeight();
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("宽度:"));
         JLabel widthLabel = new JLabel("" + width);

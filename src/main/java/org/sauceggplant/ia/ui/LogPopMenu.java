@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
  */
 public class LogPopMenu extends JPopupMenu {
 
+    private static final String NAME = "ia.ui.menu.log.name";
+    private static final String ICON = "ia.ui.menu.log.icon";
     private static final String ICON_SIZE = "ia.ui.menu.icon.size";
     private static final String FONT_SIZE = "ia.ui.menu.font.size";
     private static final String FONT = "ia.ui.menu.font";
@@ -28,9 +30,10 @@ public class LogPopMenu extends JPopupMenu {
      */
     private void init() {
         JMenuItem clear = new JMenuItem();
-        clear.setName("清空");
-        clear.setText("清空");
-        clear.setIcon(IconUtil.getIcon("clear.png", "清空",
+        clear.setName(PropertiesUtil.getProperty(NAME));
+        clear.setText(PropertiesUtil.getProperty(NAME));
+        clear.setIcon(IconUtil.getIcon(PropertiesUtil.getProperty(ICON),
+                PropertiesUtil.getProperty(NAME),
                 Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))));
         clear.addActionListener(new AbstractAction() {
             @Override

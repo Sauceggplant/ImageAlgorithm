@@ -2,6 +2,7 @@ package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
 import org.sauceggplant.ia.util.IconUtil;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,16 +24,27 @@ public class Mirror implements Algorithm {
      */
     private IaPanel iaPanel;
 
+    private static final String ICON = "ia.ui.mirror.icon";
+    private static final String ICON_SIZE = "ia.ui.mirror.icon.size";
+
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：镜像");
+        logger.info("Mirror:镜像");
+        BufferedImage image = iaPanel.getContent().getImage();
+        if (null == image) {
+            logger.error("请先打开一张图片");
+            return;
+        }
         this.iaPanel = iaPanel;
         int result = JOptionPane.showOptionDialog(iaPanel.getIaWindow(),
                 "请选择镜像类型",
                 "镜像", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.INFORMATION_MESSAGE,
-                IconUtil.getIcon("icon.png", "镜像", 16),
-                new String[]{"水平镜像", "垂直镜像"}, "水平镜像");
+                IconUtil.getIcon(PropertiesUtil.getProperty(ICON),
+                        "镜像",
+                        Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))),
+                new String[]{"水平镜像", "垂直镜像"}, "垂直镜像");
+        //logger.info("选项:{}",result);
         switch (result) {
             case 0:
                 mirrorH();

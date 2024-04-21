@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,12 @@ public class Binarization implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(Binarization.class);
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
+    private static final String TITLE = "ia.ui.binarization.title";
+
+    private static final String BTN_OK = "ia.ui.btn.ok";
+
     /**
      * 缩放
      *
@@ -26,32 +33,32 @@ public class Binarization implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：二值化");
+        logger.info("Binarization:二值化");
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
-        slider.setToolTipText("二值化阈值");
+        slider.setToolTipText(PropertiesUtil.getProperty(TITLE));
         slider.setMajorTickSpacing(32);
         slider.setMinorTickSpacing(8);
         slider.setPaintLabels(true);
         slider.setPaintTicks(true);
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
-        dialog.setTitle("二值化阈值");
+        dialog.setTitle(PropertiesUtil.getProperty(TITLE));
         dialog.setPreferredSize(new Dimension(500, 100));
         dialog.setSize(new Dimension(500, 100));
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLocationRelativeTo(iaPanel.getIaWindow());
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(slider, BorderLayout.CENTER);
-        JButton ok = new JButton("确定");
+        JButton ok = new JButton(PropertiesUtil.getProperty(BTN_OK));
         ok.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int value = slider.getValue();
-                logger.info("二值化阈值:{}", value);
+                logger.info("{}:{}", PropertiesUtil.getProperty(TITLE), value);
                 BufferedImage bufferedImage = iaPanel.getContent().getImage();
                 if (null != bufferedImage) {
                     iaPanel.getOutput().setImage(binarization(bufferedImage, value));
                 } else {
-                    logger.error("请先打开一张图片");
+                    logger.error(PropertiesUtil.getProperty(OPEN));
                 }
                 dialog.setVisible(false);
             }

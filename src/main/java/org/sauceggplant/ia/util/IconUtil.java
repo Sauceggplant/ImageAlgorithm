@@ -17,7 +17,7 @@ public class IconUtil {
      * @return 图标
      */
     public static ImageIcon getIcon(String source, String description, int size) {
-        ImageIcon icon = new ImageIcon(IconUtil.class.getClassLoader().getResource(source), description);
+        ImageIcon icon = new ImageIcon(IconUtil.class.getClassLoader().getResource("image/"+source), description);
         Image image = icon.getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT);
         return new ImageIcon(image);
     }

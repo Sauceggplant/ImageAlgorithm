@@ -21,7 +21,7 @@ public class Mosaic implements Algorithm {
 
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：马赛克");
+        logger.info("Mosaic:马赛克");
         BufferedImage image = iaPanel.getContent().getImage();
         if (null == image) {
             logger.error("请先打开一张图片");

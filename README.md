@@ -239,10 +239,18 @@ Prewitt垂直
 
 ![GaussianBlur1](image/convolution/GaussianBlur1.png)
 
+工具栏
+工具栏可以根据需要做隐藏
+![工具栏](image/Toolbar.png)
+
 关于
 ![关于](image/About.png)
 
 ## 自定义算法
+
+### DIY&二次开发
+
+![DIY](image/DIY.png)
 
 1. 在
 

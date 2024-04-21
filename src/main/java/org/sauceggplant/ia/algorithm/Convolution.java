@@ -1,6 +1,9 @@
 package org.sauceggplant.ia.algorithm;
 
+import org.sauceggplant.ia.pojo.ConvolutionCore;
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.ConvolutionCoreUtil;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 /**
  * 卷积
@@ -22,34 +26,22 @@ public class Convolution implements Algorithm {
     private static final Logger logger = LoggerFactory.getLogger(Convolution.class);
 
     /**
-     * 三阶算子
+     * 卷积核
      */
-    private static double[][][] core = new double[][][]{
-            {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}},//索贝尔(Sobel)水平
-            {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}},//索贝尔(Sobel)垂直
-            {{1, 1, 1}, {0, 0, 0}, {-1, -1, -1}},//Prewitt水平
-            {{1, 0, -1}, {1, 0, -1}, {1, 0, -1}},//Prewitt垂直
-            {{0, 1, 0}, {1, -4, 1}, {0, 1, 0}},//拉普拉斯(Laplacian)4
-            {{1, 1, 1}, {1, -8, 1}, {1, 1, 1}},//拉普拉斯(Laplacian)8
-            {{-1, -0.5, -1}, {-0.5, 6, -0.5}, {-1, -0.5, -1}},//拉普拉斯变形1
-            {{1, 0.5, 1}, {0.5, -6, 0.5}, {1, 0.5, 1}},//拉普拉斯变形2
-            {{1.0d / 9, 1.0d / 9, 1.0d / 9}, {1.0d / 9, 1.0d / 9, 1.0d / 9}, {1.0d / 9, 1.0d / 9, 1.0d / 9}},//均值模糊
-            {{1 / 16.0d, 2 / 16.0d, 1 / 16.0d}, {2 / 16.0d, 4 / 16.0d, 2 / 16.0d}, {1 / 16.0d, 2 / 16.0d, 1 / 16.0d}},//高斯(Gaussian)模糊
-            {{0.075, 0.124, 0.075}, {0.124, 0.204, 0.124}, {0.075, 0.124, 0.075}},//高斯(Gaussian)模糊，sigma=1，归一化
-            {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}//自定义
-    };
+    private static List<ConvolutionCore> convolutionCoreList = ConvolutionCoreUtil.getConvolutionCoreList();
 
     /**
      * 3*3算子
      */
     private JTextField[] coreData3 = new JTextField[9];
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：卷积");
-
+        logger.info("Convolution：卷积");
         if (null == iaPanel.getContent().getImage()) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
 
@@ -59,20 +51,9 @@ public class Convolution implements Algorithm {
         JPanel option = new JPanel();
         option.setLayout(new FlowLayout(FlowLayout.LEFT));
         option.add(new JLabel("算子"));
-        String[] coreItems = new String[]{
-                "索贝尔(Sobel)水平",
-                "索贝尔(Sobel)垂直",
-                "Prewitt水平",
-                "Prewitt垂直",
-                "拉普拉斯(Laplacian)4",
-                "拉普拉斯(Laplacian)8",
-                "拉普拉斯变形1",
-                "拉普拉斯变形2",
-                "均值模糊",
-                "高斯(Gaussian)模糊",
-                "高斯(Gaussian)模糊，sigma=1，归一化",
-                "自定义算子"};
-        JComboBox<String> coreComboBox = new JComboBox(coreItems);
+
+
+        JComboBox<String> coreComboBox = new JComboBox(getCoreNames());
         coreComboBox.setSelectedIndex(0);
         option.add(coreComboBox);
         panel.add(option, BorderLayout.NORTH);
@@ -89,6 +70,7 @@ public class Convolution implements Algorithm {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     int index = coreComboBox.getSelectedIndex();
+                    double[][][] core = getCores();
                     ((JTextField) (content.getComponents()[0])).setText("" + core[index][0][0]);
                     ((JTextField) (content.getComponents()[1])).setText("" + core[index][0][1]);
                     ((JTextField) (content.getComponents()[2])).setText("" + core[index][0][2]);
@@ -131,6 +113,7 @@ public class Convolution implements Algorithm {
                     selectCore[2][1] = Double.parseDouble(coreData3[7].getText());
                     selectCore[2][1] = Double.parseDouble(coreData3[8].getText());
                 } else {
+                    double[][][] core = getCores();
                     selectCore = core[index];
                 }
 
@@ -142,7 +125,7 @@ public class Convolution implements Algorithm {
                     }
                     stringBuffer.append("\n");
                 }
-                logger.info("三阶算子为:{}\n {}", coreItems[index], stringBuffer.toString());
+                logger.info("三阶算子为:{}\n {}", getCoreNames()[index], stringBuffer.toString());
 
                 //图像卷积计算
                 BufferedImage image = convolution(iaPanel.getContent().getImage(), selectCore);
@@ -156,6 +139,7 @@ public class Convolution implements Algorithm {
     }
 
     public void initCoreData3(int selectCoreIndex) {
+        double[][][] core = getCores();
         coreData3[0] = new JTextField("" + core[selectCoreIndex][0][0]);
         coreData3[1] = new JTextField("" + core[selectCoreIndex][0][1]);
         coreData3[2] = new JTextField("" + core[selectCoreIndex][0][2]);
@@ -238,5 +222,21 @@ public class Convolution implements Algorithm {
             }
         }
         return result;
+    }
+
+    private String[] getCoreNames() {
+        String[] names = new String[convolutionCoreList.size()];
+        for (int i = 0; i < convolutionCoreList.size(); i++) {
+            names[i] = convolutionCoreList.get(i).getName();
+        }
+        return names;
+    }
+
+    private double[][][] getCores() {
+        double[][][] core = new double[convolutionCoreList.size()][3][3];
+        for (int i = 0; i < convolutionCoreList.size(); i++) {
+            core[i] = convolutionCoreList.get(i).getCore();
+        }
+        return core;
     }
 }

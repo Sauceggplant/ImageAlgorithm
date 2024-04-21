@@ -2,6 +2,7 @@ package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
 import org.sauceggplant.ia.util.IconUtil;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,14 @@ public class About implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(About.class);
 
+    private static final String MESSAGE = "ia.ui.about.message";
+
+    private static final String TITLE = "ia.ui.about.title";
+
+    private static final String ICON = "ia.ui.about.icon";
+
+    private static final String ICON_SIZE = "ia.ui.about.icon.size";
+
     /**
      * 关于
      *
@@ -24,13 +33,13 @@ public class About implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：关于");
+        logger.info("About:关于");
         JOptionPane.showMessageDialog(iaPanel,
-                "图像算法\n" +
-                        "版本:\t1.1-SNAPSHOT\n" +
-                        "版权:\tzhaozx19881105@163.com",
-                "关于",
+                PropertiesUtil.getProperty(MESSAGE),
+                PropertiesUtil.getProperty(TITLE),
                 JOptionPane.INFORMATION_MESSAGE,
-                IconUtil.getIcon("icon.png", "about", 64));
+                IconUtil.getIcon(PropertiesUtil.getProperty(ICON),
+                        PropertiesUtil.getProperty(TITLE),
+                        Integer.parseInt(PropertiesUtil.getProperty(ICON_SIZE))));
     }
 }

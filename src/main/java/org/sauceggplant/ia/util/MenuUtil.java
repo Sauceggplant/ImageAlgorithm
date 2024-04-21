@@ -1,8 +1,8 @@
 package org.sauceggplant.ia.util;
 
 import com.alibaba.fastjson2.JSONArray;
-import org.sauceggplant.ia.ui.IaMenu;
-import org.sauceggplant.ia.ui.IaMenuItem;
+import org.sauceggplant.ia.pojo.IaMenu;
+import org.sauceggplant.ia.pojo.IaMenuItem;
 import org.sauceggplant.ia.ui.IaMenuItemActionListener;
 import org.sauceggplant.ia.ui.IaPanel;
 import org.slf4j.Logger;
