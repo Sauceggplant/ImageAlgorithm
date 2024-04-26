@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,15 +20,17 @@ public class Rotate implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(Rotate.class);
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：旋转");
-
+        logger.info("Rotate:旋转");
         BufferedImage bufferedImage = iaPanel.getContent().getImage();
         if (null == bufferedImage) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 360, 90);
         slider.setToolTipText("旋转角度");
         slider.setMajorTickSpacing(20);

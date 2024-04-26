@@ -34,6 +34,12 @@ public class Binarization implements Algorithm {
     @Override
     public void run(IaPanel iaPanel) {
         logger.info("Binarization:二值化");
+        BufferedImage image = iaPanel.getContent().getImage();
+        if (null == image) {
+            logger.error(PropertiesUtil.getProperty(OPEN));
+            return;
+        }
+
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
         slider.setToolTipText(PropertiesUtil.getProperty(TITLE));
         slider.setMajorTickSpacing(32);

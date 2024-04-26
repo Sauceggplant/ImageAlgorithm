@@ -16,7 +16,7 @@ public class Toolbar implements Algorithm {
 
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：工具栏");
+        logger.info("Toolbar:工具栏");
         if (iaPanel.getIaWindow().getToolBar().isVisible()) {
             iaPanel.getIaWindow().getToolBar().setVisible(false);
             logger.info("隐藏工具栏");

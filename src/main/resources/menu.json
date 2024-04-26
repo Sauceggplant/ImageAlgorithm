@@ -79,10 +79,24 @@
         "toolBar": true
       },
       {
+        "name": "deltaColorScale",
+        "text": "<html><U>D</U>色差分布",
+        "icon": "deltaColorScale.png",
+        "accelerator": 68,
+        "toolBar": true
+      },
+      {
         "name": "mosaic",
         "text": "<html><U>M</U>马赛克",
         "icon": "mosaic.png",
         "accelerator": 77,
+        "toolBar": true
+      },
+      {
+        "name": "salt",
+        "text": "<html><U>5</U>加盐",
+        "icon": "salt.png",
+        "accelerator": 53,
         "toolBar": true
       },
       {
@@ -111,6 +125,13 @@
         "text": "<html><U>C</U>卷积",
         "icon": "convolution.png",
         "accelerator": 67,
+        "toolBar": true
+      },
+      {
+        "name": "edge",
+        "text": "<html><U>E</U>边缘检测",
+        "icon": "edge.png",
+        "accelerator": 69,
         "toolBar": true
       }
     ]

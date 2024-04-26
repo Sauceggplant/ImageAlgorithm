@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +51,8 @@ public class Gray implements Algorithm {
      */
     private static final int defaultBlue = 114;
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     /**
      * 灰度
      *
@@ -57,12 +60,13 @@ public class Gray implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：灰度");
+        logger.info("Gray:灰度");
         BufferedImage bufferedImage = iaPanel.getContent().getImage();
         if (null == bufferedImage) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
         dialog.setTitle("灰度图像,颜色占比调整");
         dialog.setPreferredSize(new Dimension(600, 320));

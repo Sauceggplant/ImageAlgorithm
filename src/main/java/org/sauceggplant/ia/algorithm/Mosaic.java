@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,12 +20,14 @@ public class Mosaic implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(Mosaic.class);
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     @Override
     public void run(IaPanel iaPanel) {
         logger.info("Mosaic:马赛克");
         BufferedImage image = iaPanel.getContent().getImage();
         if (null == image) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
 

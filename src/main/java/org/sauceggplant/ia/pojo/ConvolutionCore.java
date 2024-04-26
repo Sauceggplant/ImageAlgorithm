@@ -11,7 +11,7 @@ public class ConvolutionCore {
     private String name;
 
     /**
-     * 三阶卷积核的数据
+     * 卷积核的数据
      */
     private double[][] core;
 

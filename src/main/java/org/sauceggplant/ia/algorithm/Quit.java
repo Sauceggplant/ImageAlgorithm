@@ -20,7 +20,7 @@ public class Quit implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：退出");
+        logger.info("Quit:退出");
         System.exit(0);
     }
 }

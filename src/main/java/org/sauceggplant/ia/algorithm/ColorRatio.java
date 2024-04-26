@@ -1,5 +1,6 @@
 package org.sauceggplant.ia.algorithm;
 
+import org.sauceggplant.ia.enums.ColorEnum;
 import org.sauceggplant.ia.ui.IaPanel;
 import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
@@ -47,7 +48,6 @@ public class ColorRatio implements Algorithm {
     private static final String GREEN = "ia.ui.color.ratio.green";
     private static final String BLUE = "ia.ui.color.ratio.blue";
 
-
     @Override
     public void run(IaPanel iaPanel) {
         logger.info("ColorRatio：颜色占比");
@@ -56,6 +56,7 @@ public class ColorRatio implements Algorithm {
             logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+
         this.iaPanel = iaPanel;
         //当前图像颜色占比
         int initRed = colorRatio(ColorEnum.RED);
@@ -210,8 +211,4 @@ public class ColorRatio implements Algorithm {
         }
         return (int) sum / width / height;
     }
-}
-
-enum ColorEnum {
-    RED, GREEN, BLUE;
 }

@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,8 @@ public class Zoom implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(Zoom.class);
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     /**
      * 缩放
      *
@@ -26,7 +29,12 @@ public class Zoom implements Algorithm {
      */
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：缩放");
+        logger.info("Zoom:缩放");
+        if (null == iaPanel.getContent().getImage()) {
+            logger.error(PropertiesUtil.getProperty(OPEN));
+            return;
+        }
+
         JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
         slider.setToolTipText("图像缩放比例");
         slider.setMajorTickSpacing(10);
@@ -46,14 +54,10 @@ public class Zoom implements Algorithm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedImage bufferedImage = iaPanel.getContent().getImage();
-                if (null != bufferedImage) {
-                    int value = slider.getValue();
-                    double rate = value / 100.0D;
-                    logger.info("图片缩放比例:{}", rate);
-                    iaPanel.getOutput().setImage(zoom(bufferedImage, rate));
-                } else {
-                    logger.error("请先打开一张图片");
-                }
+                int value = slider.getValue();
+                double rate = value / 100.0D;
+                logger.info("图片缩放比例:{}", rate);
+                iaPanel.getOutput().setImage(zoom(bufferedImage, rate));
                 dialog.setVisible(false);
             }
         });

@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,15 +15,19 @@ import java.awt.image.BufferedImage;
  */
 public class GaussianBlur implements Algorithm {
 
-    //日志
+    /**
+     * 日志
+     */
     private static final Logger logger = LoggerFactory.getLogger(GaussianBlur.class);
+
+    private static final String OPEN = "ia.ui.io.file.open";
 
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("菜单：高斯模糊");
+        logger.info("GaussianBlur:高斯模糊");
         BufferedImage image = iaPanel.getContent().getImage();
         if (null == image) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
 

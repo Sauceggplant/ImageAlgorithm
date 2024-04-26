@@ -11,27 +11,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 色阶
+ * 色阶差
  */
-public class ColorScale implements Algorithm {
+public class DeltaColorScale implements Algorithm {
 
     /**
      * 日志
      */
-    private static final Logger logger = LoggerFactory.getLogger(ColorScale.class);
+    private static final Logger logger = LoggerFactory.getLogger(DeltaColorScale.class);
 
     private static final String OPEN = "ia.ui.io.file.open";
 
     @Override
     public void run(IaPanel iaPanel) {
-        logger.info("ColorScale:色阶");
+        logger.info("DeltaColorScale:色差分布");
         //打开的图像
         BufferedImage image = iaPanel.getContent().getImage();
         if (null == image) {
             logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+        BufferedImage bufferedImage = deltaColorScale(iaPanel);
+        iaPanel.getOutput().setImage(bufferedImage);
+    }
 
+    public BufferedImage deltaColorScale(IaPanel iaPanel) {
         //界面宽高
         int width = iaPanel.getOutput().getWidth();
         int height = iaPanel.getOutput().getHeight();
@@ -41,7 +45,7 @@ public class ColorScale implements Algorithm {
         Graphics graphics = bufferedImage.getGraphics();
 
         //水平边距
-        int marginH = 50;
+        int marginH = 70;
         //垂直边距
         int marginV = 40;
 
@@ -55,7 +59,7 @@ public class ColorScale implements Algorithm {
         graphics.drawLine(marginH, marginV, marginH, height - marginV);
 
         //计算直方图
-        Map<Integer, Integer> histogram = calcHistogram(image);
+        Map<Integer, Integer> histogram = calcHistogram(iaPanel.getContent().getImage());
 
         //每个直方图区域的宽度
         double eachWidth = (width - 4 * marginH) / 256;
@@ -80,7 +84,7 @@ public class ColorScale implements Algorithm {
         for (int i = 1; i < maxHeight; i++) {
             if (i % 50 == 0) {
                 graphics.setColor(Color.BLUE);
-                graphics.drawString("" + (int)(i * eachHeight), 15, height - marginV - maxHeight + (maxHeight - i));
+                graphics.drawString("" + (int) (i * eachHeight), 15, height - marginV - maxHeight + (maxHeight - i));
             }
         }
 
@@ -106,7 +110,64 @@ public class ColorScale implements Algorithm {
             }
         }
         graphics.dispose();
-        iaPanel.getOutput().setImage(bufferedImage);
+        return bufferedImage;
+    }
+
+    /**
+     * 计算直方图
+     *
+     * @param image
+     * @return
+     */
+    public Map<Integer, Integer> calcHistogram(BufferedImage image) {
+        Map<Integer, Integer> histogram = new HashMap<>();
+        //图像宽度，高度
+        int width = image.getData().getWidth();
+        int height = image.getData().getHeight();
+
+        for (int i = 0; i < 256; i++) {
+            histogram.put(i, 0);
+        }
+
+        //定义返回
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                //每个像素点
+
+                //计算每个像素点的周围的区域
+                int dxMin = i - 1 < 0 ? 0 : (i - 1);
+                int dyMin = j - 1 < 0 ? 0 : (j - 1);
+
+                //当前像素点颜色
+                int rgb = image.getRGB(i, j);
+                Color c = new Color(rgb);
+                int red = c.getRed();
+                int green = c.getGreen();
+                int blue = c.getBlue();
+                int maxd = 0;
+                //对区域做边缘计算
+                for (int dx = dxMin; dx <= i; dx++) {
+                    for (int dy = dyMin; dy <= j; dy++) {
+                        if (dx == i && dy == j) {
+                            continue;
+                        }
+                        //周围像素点颜色
+                        int drgb = image.getRGB(dx, dy);
+                        Color crgb = new Color(drgb);
+                        int dred = red - crgb.getRed();
+                        int dgreen = green - crgb.getGreen();
+                        int dblue = blue - crgb.getBlue();
+                        int d = Math.abs(dred) > Math.abs(dgreen) ? (Math.abs(dred) > Math.abs(dblue) ? dred : dblue) : (Math.abs(dgreen) > Math.abs(dblue) ? dgreen : dblue);
+                        //maxd = Math.abs(d) > maxd ? Math.abs(d) : maxd;
+                        int value = histogram.get(Math.abs(d));
+                        histogram.put(Math.abs(d), ++value);
+                    }
+                }
+//                int value = histogram.get(maxd);
+//                histogram.put(Math.abs(maxd), ++value);
+            }
+        }
+        return histogram;
     }
 
     /**
@@ -123,32 +184,5 @@ public class ColorScale implements Algorithm {
             }
         }
         return max;
-    }
-
-    /**
-     * 计算直方图数据
-     *
-     * @param image 图像
-     */
-    public Map<Integer, Integer> calcHistogram(BufferedImage image) {
-        Map<Integer, Integer> histogram = new HashMap<>();
-        for (int i = 0; i < 256; i++) {
-            histogram.put(i, 0);
-        }
-        //图像宽度，高度
-        int width = image.getData().getWidth();
-        int height = image.getData().getHeight();
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                //获取像素点的颜色(红，绿，蓝),RGB色彩空间
-                int rgb = image.getRGB(i, j);
-                Color color = new Color(rgb);
-                //对红，绿，蓝求和再求平均值，将平均值赋值回原来的红，绿，蓝颜色分量，使红==绿==蓝
-                int avg = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-                int value = histogram.get(avg);
-                histogram.put(avg, ++value);
-            }
-        }
-        return histogram;
     }
 }

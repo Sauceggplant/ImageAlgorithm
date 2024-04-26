@@ -104,8 +104,14 @@ int blue = rgb & 0xFF;
 色阶
 ![色阶](image/ColorScale.png)
 
+色差分布
+![色差分布](image/DeltaColorScale.png)
+
 马赛克
 ![马赛克](image/Mosaic.png)
+
+加盐
+![加盐](image/Salt.png)
 
 镜像
 ![镜像](image/Mirror.png)
@@ -238,6 +244,9 @@ Prewitt垂直
 ```
 
 ![GaussianBlur1](image/convolution/GaussianBlur1.png)
+
+边缘检测(Canny)
+![边缘检测](image/Edge.png)
 
 工具栏
 工具栏可以根据需要做隐藏

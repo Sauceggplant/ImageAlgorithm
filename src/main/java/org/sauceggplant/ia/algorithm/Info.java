@@ -1,6 +1,7 @@
 package org.sauceggplant.ia.algorithm;
 
 import org.sauceggplant.ia.ui.IaPanel;
+import org.sauceggplant.ia.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,8 @@ public class Info implements Algorithm {
      */
     private static final Logger logger = LoggerFactory.getLogger(Info.class);
 
+    private static final String OPEN = "ia.ui.io.file.open";
+
     /**
      * 图像信息
      *
@@ -27,9 +30,10 @@ public class Info implements Algorithm {
     public void run(IaPanel iaPanel) {
         logger.info("Info:信息");
         if (null == iaPanel.getContent().getImage()) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+
         JDialog dialog = new JDialog(iaPanel.getIaWindow());
         dialog.setTitle("图像信息");
         dialog.setPreferredSize(new Dimension(400, 300));
@@ -39,14 +43,26 @@ public class Info implements Algorithm {
         dialog.getContentPane().setLayout(new BorderLayout());
         int width = iaPanel.getContent().getImage().getWidth();
         int height = iaPanel.getContent().getImage().getHeight();
+
         JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("宽度:"));
+        jPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        JPanel size = new JPanel();
+        size.add(new JLabel("宽度:"));
         JLabel widthLabel = new JLabel("" + width);
-        jPanel.add(widthLabel);
-        jPanel.add(new JLabel("高度:"));
+        size.add(widthLabel);
+        size.add(new JLabel("高度:"));
         JLabel heightLabel = new JLabel("" + height);
-        jPanel.add(heightLabel);
+        size.add(heightLabel);
+
+        JPanel path = new JPanel();
+        path.add(new JLabel("路径:"));
+        path.add(new JLabel(iaPanel.getPath()));
+
+        jPanel.add(size);
+        jPanel.add(path);
+
         dialog.getContentPane().add(jPanel, BorderLayout.CENTER);
+
         JButton close = new JButton("关闭");
         close.addActionListener(new AbstractAction() {
             @Override

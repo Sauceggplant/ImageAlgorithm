@@ -26,15 +26,17 @@ public class Mirror implements Algorithm {
 
     private static final String ICON = "ia.ui.mirror.icon";
     private static final String ICON_SIZE = "ia.ui.mirror.icon.size";
+    private static final String OPEN = "ia.ui.io.file.open";
 
     @Override
     public void run(IaPanel iaPanel) {
         logger.info("Mirror:镜像");
         BufferedImage image = iaPanel.getContent().getImage();
         if (null == image) {
-            logger.error("请先打开一张图片");
+            logger.error(PropertiesUtil.getProperty(OPEN));
             return;
         }
+
         this.iaPanel = iaPanel;
         int result = JOptionPane.showOptionDialog(iaPanel.getIaWindow(),
                 "请选择镜像类型",
