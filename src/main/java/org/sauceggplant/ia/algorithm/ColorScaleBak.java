@@ -13,12 +13,12 @@ import java.util.Map;
 /**
  * 色阶
  */
-public class ColorScale implements Algorithm {
+public class ColorScaleBak implements Algorithm {
 
     /**
      * 日志
      */
-    private static final Logger logger = LoggerFactory.getLogger(ColorScale.class);
+    private static final Logger logger = LoggerFactory.getLogger(ColorScaleBak.class);
 
     private static final String OPEN = "ia.ui.io.file.open";
 

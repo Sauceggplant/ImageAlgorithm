@@ -51,6 +51,13 @@
         "toolBar": true
       },
       {
+        "name": "cut",
+        "text": "<html><U>7</U>裁剪",
+        "icon": "cut.png",
+        "accelerator": 55,
+        "toolBar": true
+      },
+      {
         "name": "gray",
         "text": "<html><U>G</U>灰度",
         "icon": "gray.png",
@@ -65,14 +72,28 @@
         "toolBar": true
       },
       {
+        "name": "alpha",
+        "text": "<html><U>6</U>透明度",
+        "icon": "alpha.png",
+        "accelerator": 54,
+        "toolBar": true
+      },
+      {
         "name": "colorRatio",
-        "text": "<html><U>1</U>颜色占比",
-        "icon": "colorRatio.png",
+        "text": "<html><U>1</U>颜色占比(RGB)",
+        "icon": "rgbRatio.png",
         "accelerator": 49,
         "toolBar": true
       },
       {
-        "name": "colorScale",
+        "name": "hsvRatio",
+        "text": "<html><U>H</U>颜色占比(HSV)",
+        "icon": "hsvRatio.png",
+        "accelerator": 72,
+        "toolBar": true
+      },
+      {
+        "name": "colorScaleRgb",
         "text": "<html><U>2</U>色阶",
         "icon": "colorScale.png",
         "accelerator": 50,

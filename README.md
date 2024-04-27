@@ -92,14 +92,23 @@ int blue = rgb & 0xFF;
 比例缩放
 ![比例缩放](image/Zoom.png)
 
+裁剪
+![裁剪](image/Cut.png)
+
 灰度
 ![灰度](image/Gray.png)
 
 二值化
 ![二值化](image/Binarization.png)
 
-颜色占比
+透明度
+![透明度](image/Alpha.png)
+
+颜色占比(RGB)
 ![颜色占比](image/ColorRatio.png)
+
+颜色占比(HSV)
+![颜色占比](image/HsvRatio.png)
 
 色阶
 ![色阶](image/ColorScale.png)

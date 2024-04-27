@@ -18,7 +18,7 @@ public class Salt implements Algorithm {
     /**
      * 日志
      */
-    private static final Logger logger = LoggerFactory.getLogger(ColorScale.class);
+    private static final Logger logger = LoggerFactory.getLogger(Salt.class);
 
     /**
      * 加盐
